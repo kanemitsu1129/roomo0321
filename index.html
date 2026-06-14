@@ -1,391 +1,671 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>グランドーム福岡ふくつ｜グランピングしおり</title>
-  <style>
-    :root {
-      --green:#2f6f5e;
-      --deep:#17423a;
-      --mint:#eaf6ef;
-      --sand:#fff4d6;
-      --sky:#eaf4fb;
-      --ink:#263238;
-      --muted:#607d8b;
-      --line:#d8e5df;
-      --card:#ffffffcc;
-      --accent:#f5b942;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, sans-serif;
-      line-height: 1.75;
-      background:
-        radial-gradient(circle at 10% 10%, #dff3e8 0 18%, transparent 19%),
-        radial-gradient(circle at 90% 0%, #fff0c2 0 15%, transparent 16%),
-        linear-gradient(160deg, #f7fbf6 0%, #eef7f9 55%, #fff8e8 100%);
-    }
-    .page {
-      width: min(1040px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 28px 0 56px;
-    }
-    .hero {
-      position: relative;
-      overflow: hidden;
-      border-radius: 28px;
-      padding: 48px 34px;
-      color: #fff;
-      background:
-        linear-gradient(135deg, rgba(23,66,58,.92), rgba(47,111,94,.78)),
-        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80") center/cover;
-      box-shadow: 0 18px 50px rgba(32,70,60,.22);
-    }
-    .hero::after {
-      content: "🌿";
-      position: absolute;
-      right: 28px;
-      bottom: -20px;
-      font-size: 130px;
-      opacity: .18;
-      transform: rotate(-14deg);
-    }
-    .eyebrow {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      padding: 6px 14px;
-      border: 1px solid rgba(255,255,255,.36);
-      border-radius: 999px;
-      background: rgba(255,255,255,.16);
-      backdrop-filter: blur(8px);
-      font-size: 14px;
-      letter-spacing: .08em;
-    }
-    h1 {
-      margin: 18px 0 8px;
-      font-size: clamp(32px, 6vw, 58px);
-      line-height: 1.15;
-      letter-spacing: .04em;
-    }
-    .subtitle {
-      margin: 0;
-      font-size: clamp(17px, 2.4vw, 24px);
-      opacity: .94;
-    }
-    .hero-info {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 28px;
-      max-width: 760px;
-    }
-    .hero-info div {
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.16);
-      border: 1px solid rgba(255,255,255,.24);
-    }
-    .hero-info span {
-      display: block;
-      font-size: 12px;
-      opacity: .78;
-    }
-    .hero-info strong {
-      font-size: 17px;
-    }
-    section {
-      margin-top: 28px;
-      padding: 26px;
-      border: 1px solid rgba(216,229,223,.9);
-      border-radius: 24px;
-      background: var(--card);
-      box-shadow: 0 12px 35px rgba(26,66,58,.08);
-      backdrop-filter: blur(10px);
-    }
-    h2 {
-      margin: 0 0 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--deep);
-      font-size: 26px;
-      letter-spacing: .03em;
-    }
-    .overview {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-    .tile {
-      padding: 18px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, #fff, #f7fbf8);
-      border: 1px solid var(--line);
-    }
-    .tile .label {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .tile .value {
-      margin-top: 4px;
-      font-weight: 800;
-      color: var(--deep);
-    }
-    .timeline {
-      position: relative;
-      display: grid;
-      gap: 12px;
-    }
-    .event {
-      display: grid;
-      grid-template-columns: 92px 1fr;
-      gap: 16px;
-      align-items: start;
-      padding: 16px;
-      border-radius: 18px;
-      background: #fff;
-      border: 1px solid var(--line);
-    }
-    .time {
-      color: var(--green);
-      font-weight: 900;
-      font-variant-numeric: tabular-nums;
-    }
-    .event h3 {
-      margin: 0 0 2px;
-      font-size: 18px;
-      color: var(--deep);
-    }
-    .event p { margin: 0; color: #455a64; }
-    .highlight {
-      background: linear-gradient(135deg, #fff7df, #fff);
-      border-color: #f1d99d;
-    }
-    .columns {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-    .check-card {
-      border-radius: 20px;
-      padding: 20px;
-      background: #fff;
-      border: 1px solid var(--line);
-    }
-    .check-card h3 {
-      margin: 0 0 10px;
-      color: var(--green);
-    }
-    ul {
-      margin: 0;
-      padding-left: 1.2em;
-    }
-    li { margin: 6px 0; }
-    .members {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-    .member {
-      min-height: 54px;
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: #fff;
-      border: 1px dashed #c9d8d1;
-      color: var(--muted);
-    }
-    .member.pet {
-      border-style: solid;
-      background: var(--sand);
-      color: var(--deep);
-      font-weight: 800;
-    }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-    .contact {
-      padding: 16px;
-      border-radius: 16px;
-      background: #fff;
-      border: 1px solid var(--line);
-    }
-    .contact span { color: var(--muted); font-size: 13px; display:block; }
-    .contact strong { color: var(--deep); }
-    .memo {
-      min-height: 180px;
-      border-radius: 20px;
-      background:
-        linear-gradient(#fff 31px, #e6eee9 32px),
-        #fff;
-      background-size: 100% 32px;
-      border: 1px solid var(--line);
-    }
-    .footer {
-      text-align: center;
-      margin-top: 28px;
-      color: var(--green);
-      font-weight: 800;
-    }
-    .print-note {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 13px;
-      text-align: right;
-    }
-    @media (max-width: 780px) {
-      .hero { padding: 34px 22px; border-radius: 22px; }
-      .hero-info, .overview, .columns, .contact-grid { grid-template-columns: 1fr; }
-      .members { grid-template-columns: repeat(2, 1fr); }
-      section { padding: 20px; }
-      .event { grid-template-columns: 72px 1fr; }
-    }
-    @media print {
-      body { background: #fff; }
-      .page { width: 100%; padding: 0; }
-      .hero, section { box-shadow: none; break-inside: avoid; }
-      .hero { color: #fff; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-      a { color: inherit; text-decoration: none; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grandome Fukutsu｜Autumn Glamping 2026</title>
+<meta name="description" content="グランドーム福岡ふくつ グランピング旅のしおり">
+<style>
+:root{
+  --bg:#f7f3ea;
+  --ink:#17231f;
+  --muted:#6d756f;
+  --green:#173d34;
+  --green2:#285f50;
+  --gold:#c5a15a;
+  --sand:#eadfc7;
+  --white:#fffaf1;
+  --line:rgba(23,61,52,.16);
+  --glass:rgba(255,250,241,.74);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+.hero{
+  min-height:100svh;
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background:
+    linear-gradient(120deg,rgba(9,24,20,.78),rgba(9,24,20,.25),rgba(9,24,20,.72)),
+    url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2400&q=90") center/cover;
+}
+.hero::after{
+  content:"";
+  position:absolute;inset:22px;
+  border:1px solid rgba(234,223,199,.45);
+  pointer-events:none;
+}
+.hero-inner{
+  position:relative;
+  z-index:2;
+  width:min(980px,calc(100% - 48px));
+  color:white;
+  text-align:center;
+}
+.kicker{
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  font-size:12px;
+  color:var(--sand);
+  font-weight:700;
+}
+.hero h1{
+  margin:26px 0 18px;
+  font-size:clamp(56px,14vw,156px);
+  line-height:.82;
+  letter-spacing:.035em;
+  font-weight:500;
+}
+.hero .sub{
+  font-size:clamp(18px,4vw,34px);
+  letter-spacing:.12em;
+  margin:0;
+}
+.hero-meta{
+  margin:48px auto 0;
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+}
+.hero-meta span{
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(12px);
+  padding:12px 18px;
+  border-radius:999px;
+  letter-spacing:.08em;
+}
+.scroll{
+  position:absolute;
+  bottom:34px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:3;
+  color:#fff;
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  font-size:11px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  opacity:.82;
+}
+.scroll::after{
+  content:"";
+  display:block;
+  width:1px;
+  height:42px;
+  background:#fff;
+  margin:12px auto 0;
+  opacity:.7;
+}
+.section{
+  position:relative;
+  padding:96px max(24px,6vw);
+}
+.lead{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:min(8vw,96px);
+  align-items:center;
+  min-height:82svh;
+}
+.lead-copy .small-title{
+  color:var(--gold);
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.26em;
+  font-weight:800;
+  font-size:12px;
+}
+.lead-copy h2{
+  font-size:clamp(42px,7vw,92px);
+  line-height:.94;
+  font-weight:500;
+  margin:20px 0 26px;
+}
+.lead-copy p{
+  font-size:clamp(17px,2.2vw,24px);
+  line-height:2.05;
+  margin:0;
+  color:#33413b;
+}
+.photo-card{
+  min-height:620px;
+  border-radius:36px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 28px 80px rgba(23,61,52,.22);
+  background:
+    linear-gradient(180deg,rgba(23,61,52,0),rgba(23,61,52,.35)),
+    url("https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=1800&q=90") center/cover;
+}
+.photo-card .caption{
+  position:absolute;
+  left:28px;bottom:28px;
+  color:#fff;
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-size:12px;
+}
+.stats{
+  background:var(--green);
+  color:var(--white);
+  padding:84px max(24px,6vw);
+}
+.stats-grid{
+  max-width:1120px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:rgba(234,223,199,.25);
+  border:1px solid rgba(234,223,199,.25);
+}
+.stat{
+  background:var(--green);
+  min-height:188px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:24px;
+}
+.stat b{
+  display:block;
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  font-size:clamp(38px,7vw,72px);
+  line-height:1;
+  color:var(--gold);
+}
+.stat span{
+  display:block;
+  margin-top:12px;
+  letter-spacing:.18em;
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  text-transform:uppercase;
+  font-size:11px;
+}
+.timeline-wrap{
+  background:
+    radial-gradient(circle at 0 0,rgba(197,161,90,.22),transparent 36%),
+    linear-gradient(180deg,#fbf7ee,#f4eddf);
+}
+.section-title{
+  max-width:1120px;
+  margin:0 auto 42px;
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:24px;
+}
+.section-title h2{
+  margin:0;
+  color:var(--green);
+  font-size:clamp(40px,7vw,82px);
+  font-weight:500;
+  line-height:.92;
+}
+.section-title p{
+  margin:0;
+  max-width:420px;
+  color:var(--muted);
+  line-height:1.9;
+}
+.days{
+  max-width:1120px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+.day-card{
+  background:rgba(255,255,255,.72);
+  border:1px solid var(--line);
+  border-radius:34px;
+  padding:30px;
+  box-shadow:0 18px 60px rgba(23,61,52,.08);
+}
+.day-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  padding-bottom:22px;
+  border-bottom:1px solid var(--line);
+}
+.day-head h3{
+  margin:0;
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  font-size:38px;
+  letter-spacing:.05em;
+  color:var(--green);
+}
+.day-head span{
+  color:var(--gold);
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  font-weight:800;
+  letter-spacing:.16em;
+}
+.time-row{
+  display:grid;
+  grid-template-columns:86px 1fr;
+  gap:18px;
+  padding:18px 0;
+  border-bottom:1px solid rgba(23,61,52,.1);
+}
+.time-row:last-child{border-bottom:0}
+.time-row .time{
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  color:var(--green);
+  font-size:18px;
+  font-weight:900;
+}
+.time-row h4{
+  margin:0 0 4px;
+  font-size:21px;
+  color:#1f362f;
+}
+.time-row p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+}
+.gallery{
+  padding:0;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  min-height:74svh;
+}
+.gal{
+  position:relative;
+  overflow:hidden;
+  background-size:cover;
+  background-position:center;
+}
+.gal::after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,20,18,.1),rgba(10,20,18,.62));
+}
+.gal div{
+  position:absolute;
+  left:30px;right:30px;bottom:34px;
+  z-index:2;
+  color:white;
+}
+.gal h3{
+  margin:0;
+  font-size:clamp(34px,5vw,62px);
+  font-weight:500;
+}
+.gal p{
+  margin:10px 0 0;
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--sand);
+}
+.guests{
+  background:#fbf7ee;
+}
+.guest-layout{
+  max-width:1120px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:.95fr 1.05fr;
+  gap:28px;
+  align-items:start;
+}
+.crew{
+  border-radius:34px;
+  padding:34px;
+  color:white;
+  min-height:540px;
+  background:
+    linear-gradient(180deg,rgba(23,61,52,.18),rgba(23,61,52,.82)),
+    url("https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=1600&q=90") center/cover;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+.crew h2{
+  margin:0 0 14px;
+  font-size:clamp(46px,7vw,84px);
+  font-weight:500;
+}
+.crew p{margin:0;color:var(--sand);line-height:1.9}
+.guest-cards{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+.guest-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:20px;
+  min-height:92px;
+}
+.guest-card b{
+  display:block;
+  color:var(--green);
+  font-size:22px;
+}
+.guest-card span{
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:11px;
+  color:var(--gold);
+}
+.guest-card.pet{
+  background:#fff4da;
+}
+.rooms{
+  max-width:1120px;
+  margin:24px auto 0;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+.room{
+  border-radius:24px;
+  padding:24px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  color:white;
+  min-height:168px;
+}
+.room h3{
+  margin:0 0 14px;
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  letter-spacing:.16em;
+  color:var(--gold);
+}
+.room ul{
+  margin:0;
+  padding-left:1.1em;
+  line-height:1.75;
+}
+.checks{
+  background:
+    linear-gradient(90deg,rgba(247,243,234,.88),rgba(247,243,234,.64)),
+    url("https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=2200&q=90") center/cover;
+}
+.check-grid{
+  max-width:1120px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+.check-card{
+  background:var(--glass);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.58);
+  border-radius:30px;
+  padding:30px;
+}
+.check-card h3{
+  margin:0 0 18px;
+  color:var(--green);
+  font-size:28px;
+}
+.check-card ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap:12px;
+}
+.check-card li{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  font-size:18px;
+}
+.check-card li::before{
+  content:"";
+  width:18px;height:18px;
+  border:2px solid var(--gold);
+  border-radius:6px;
+  flex:0 0 auto;
+}
+.contact{
+  min-height:92svh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  padding:0;
+  background:var(--green);
+  color:white;
+}
+.contact-photo{
+  background:
+    linear-gradient(180deg,rgba(23,61,52,.1),rgba(23,61,52,.6)),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=90") center/cover;
+}
+.contact-body{
+  padding:min(8vw,90px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.contact-body h2{
+  margin:0 0 20px;
+  font-size:clamp(44px,7vw,88px);
+  line-height:.92;
+  font-weight:500;
+}
+.contact-body .message{
+  color:var(--sand);
+  font-size:22px;
+  line-height:1.9;
+  margin:0 0 36px;
+}
+.info-list{
+  display:grid;
+  gap:12px;
+}
+.info{
+  border:1px solid rgba(234,223,199,.28);
+  border-radius:18px;
+  padding:16px 18px;
+  background:rgba(255,255,255,.06);
+}
+.info span{
+  display:block;
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:11px;
+  color:var(--gold);
+  margin-bottom:4px;
+}
+.info b{font-size:18px}
+.footer{
+  padding:38px 24px;
+  text-align:center;
+  background:#0f2d26;
+  color:var(--sand);
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-size:12px;
+}
+@media(max-width:800px){
+  .hero h1{font-size:20vw}
+  .hero-meta{margin-top:34px}
+  .hero-meta span{width:100%;text-align:center}
+  .section{padding:70px 20px}
+  .lead,.days,.guest-layout,.check-grid,.contact{grid-template-columns:1fr}
+  .photo-card{min-height:420px}
+  .section-title{display:block}
+  .section-title p{margin-top:18px}
+  .gallery{grid-template-columns:1fr;min-height:auto}
+  .gal{min-height:62svh}
+  .rooms{grid-template-columns:1fr}
+  .guest-cards{grid-template-columns:1fr}
+  .contact-photo{min-height:46svh;order:2}
+  .contact-body{padding:70px 24px}
+}
+@media print{
+  body{background:white}
+  .hero,.section,.stats,.gallery,.contact{break-after:page}
+}
+</style>
 </head>
 <body>
-  <main class="page">
-    <header class="hero">
-      <div class="eyebrow">GLAMPING TRIP GUIDE</div>
-      <h1>グランドーム福岡ふくつ<br>グランピングしおり</h1>
-      <p class="subtitle">〜 みんなで楽しむグランピングの旅 〜</p>
-      <div class="hero-info">
-        <div><span>日程</span><strong>2026.10.17 Sat - 18 Sun</strong></div>
-        <div><span>宿泊</span><strong>1泊2日</strong></div>
-        <div><span>参加</span><strong>12人＋ちょこすけ＋たろ</strong></div>
-      </div>
-    </header>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Private Trip Guide</div>
+    <h1>GRANDOME<br>FUKUTSU</h1>
+    <p class="sub">Autumn Glamping 2026</p>
+    <div class="hero-meta">
+      <span>2026.10.17 Sat — 10.18 Sun</span>
+      <span>1 Night / 2 Days</span>
+      <span>12 Guests + 2 Dogs</span>
+    </div>
+  </div>
+  <div class="scroll">Scroll</div>
+</header>
 
-    <section>
-      <h2>📋 旅の概要</h2>
-      <div class="overview">
-        <div class="tile"><div class="label">施設名</div><div class="value">グランドーム福岡ふくつ</div></div>
-        <div class="tile"><div class="label">チェックイン</div><div class="value">15:00</div></div>
-        <div class="tile"><div class="label">チェックアウト</div><div class="value">翌 10:00</div></div>
-        <div class="tile"><div class="label">夕食</div><div class="value">バーベキュー（BBQ）</div></div>
-      </div>
-    </section>
+<section class="section lead">
+  <div class="lead-copy">
+    <div class="small-title">The Weekend</div>
+    <h2>A weekend<br>to slow down.</h2>
+    <p>海を眺める．<br>火を囲む．<br>何もしない時間を，みんなで楽しむ．<br><br>いつもの旅行より少しだけ特別な，秋のグランピングへ．</p>
+  </div>
+  <div class="photo-card"><div class="caption">Glamping mood</div></div>
+</section>
 
-    <section>
-      <h2>🌅 1日目｜10月17日（土）</h2>
-      <div class="timeline">
-        <div class="event"><div class="time">〜14:45</div><div><h3>各自 現地集合</h3><p>福岡市内から車で約40分．迷わず早めに出発！</p></div></div>
-        <div class="event"><div class="time">15:00</div><div><h3>チェックイン</h3><p>グランドーム福岡ふくつ 受付へ．</p></div></div>
-        <div class="event"><div class="time">15:30</div><div><h3>施設内探検・写真タイム</h3><p>ドームテントの中をみんなで確認しよう．</p></div></div>
-        <div class="event"><div class="time">16:00</div><div><h3>自由時間・アクティビティ</h3><p>施設内を散策，玄界灘の景色を楽しもう．</p></div></div>
-        <div class="event"><div class="time">17:00</div><div><h3>BBQ準備スタート</h3><p>役割分担を決めて協力して準備．</p></div></div>
-        <div class="event highlight"><div class="time">18:00</div><div><h3>🍖 バーベキューディナー</h3><p>みんなで乾杯！お肉も野菜もたっぷり．</p></div></div>
-        <div class="event"><div class="time">20:00</div><div><h3>焚き火・星空観察</h3><p>秋の夜空をのんびり眺めよう🌟</p></div></div>
-        <div class="event"><div class="time">21:00</div><div><h3>ゲーム・おしゃべりタイム</h3><p>トランプや持ち寄りゲームで盛り上がろう．</p></div></div>
-        <div class="event"><div class="time">23:00</div><div><h3>就寝</h3><p>明日に備えてゆっくり休もう．</p></div></div>
-      </div>
-    </section>
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat"><div><b>14</b><span>Members</span></div></div>
+    <div class="stat"><div><b>2</b><span>Days</span></div></div>
+    <div class="stat"><div><b>1</b><span>Night</span></div></div>
+    <div class="stat"><div><b>∞</b><span>Memories</span></div></div>
+  </div>
+</section>
 
-    <section>
-      <h2>🌄 2日目｜10月18日（日）</h2>
-      <div class="timeline">
-        <div class="event"><div class="time">07:00</div><div><h3>起床・朝の散歩</h3><p>朝の澄んだ空気を吸いに行こう．</p></div></div>
-        <div class="event"><div class="time">08:00</div><div><h3>朝食</h3><p>施設の朝食メニューまたは各自持参．</p></div></div>
-        <div class="event"><div class="time">09:00</div><div><h3>フリータイム・撮影会</h3><p>ドームテントをバックに記念写真を忘れずに📸</p></div></div>
-        <div class="event"><div class="time">09:30</div><div><h3>片付け・荷物まとめ</h3><p>忘れ物チェックをしっかりと！</p></div></div>
-        <div class="event"><div class="time">10:00</div><div><h3>チェックアウト</h3><p>フロントに鍵等の返却を忘れずに．</p></div></div>
-        <div class="event"><div class="time">10:30</div><div><h3>近隣観光（任意）</h3><p>宗像大社・道の駅むなかたなどへ．</p></div></div>
-        <div class="event"><div class="time">12:00</div><div><h3>ランチ</h3><p>地元の海鮮や名物グルメを楽しもう．</p></div></div>
-        <div class="event highlight"><div class="time">14:00</div><div><h3>解散</h3><p>また次の旅でも！お疲れさまでした🎉</p></div></div>
-      </div>
-    </section>
+<section class="section timeline-wrap">
+  <div class="section-title">
+    <h2>Trip<br>Schedule</h2>
+    <p>予定は詰め込みすぎず，ゆっくり過ごせる流れに．BBQ，焚き火，朝の散歩をメインに楽しみます．</p>
+  </div>
+  <div class="days">
+    <div class="day-card">
+      <div class="day-head"><h3>DAY 1</h3><span>10.17 SAT</span></div>
+      <div class="time-row"><div class="time">14:45</div><div><h4>現地集合</h4><p>早めに到着して，チェックインに備えます．</p></div></div>
+      <div class="time-row"><div class="time">15:00</div><div><h4>Check In</h4><p>受付後，ドーム内を確認．</p></div></div>
+      <div class="time-row"><div class="time">16:00</div><div><h4>Free Time</h4><p>散策，写真，海辺の時間．</p></div></div>
+      <div class="time-row"><div class="time">18:00</div><div><h4>BBQ Dinner</h4><p>みんなで乾杯．</p></div></div>
+      <div class="time-row"><div class="time">20:00</div><div><h4>Bonfire</h4><p>焚き火と星空．</p></div></div>
+      <div class="time-row"><div class="time">23:00</div><div><h4>Good Night</h4><p>明日に備えて休みます．</p></div></div>
+    </div>
+    <div class="day-card">
+      <div class="day-head"><h3>DAY 2</h3><span>10.18 SUN</span></div>
+      <div class="time-row"><div class="time">07:00</div><div><h4>Morning Walk</h4><p>朝の空気を楽しむ散歩．</p></div></div>
+      <div class="time-row"><div class="time">08:00</div><div><h4>Breakfast</h4><p>ゆっくり朝食．</p></div></div>
+      <div class="time-row"><div class="time">09:00</div><div><h4>Photo Time</h4><p>ドームを背景に記念撮影．</p></div></div>
+      <div class="time-row"><div class="time">10:00</div><div><h4>Check Out</h4><p>忘れ物チェック．</p></div></div>
+      <div class="time-row"><div class="time">12:00</div><div><h4>Lunch</h4><p>近隣でランチ．</p></div></div>
+      <div class="time-row"><div class="time">14:00</div><div><h4>Finish</h4><p>解散．また次の旅へ．</p></div></div>
+    </div>
+  </div>
+</section>
 
-    <section>
-      <h2>🎒 持ち物チェックリスト</h2>
-      <div class="columns">
-        <div class="check-card">
-          <h3>基本の持ち物</h3>
-          <ul>
-            <li>身分証明書・財布・現金</li>
-            <li>着替え（2日分）・パジャマ</li>
-            <li>洗面用具（歯ブラシ・シャンプーなど）</li>
-            <li>タオル</li>
-            <li>スマートフォン・充電器・モバイルバッテリー</li>
-          </ul>
-        </div>
-        <div class="check-card">
-          <h3>グランピングに役立つもの</h3>
-          <ul>
-            <li>虫除けスプレー・かゆみ止め</li>
-            <li>羽織れる上着・ジャケット</li>
-            <li>歩きやすい靴・サンダル</li>
-            <li>日焼け止め</li>
-            <li>雨具（折りたたみ傘）</li>
-          </ul>
-        </div>
-        <div class="check-card">
-          <h3>BBQに持っていくと良いもの</h3>
-          <ul>
-            <li>飲み物（好みのドリンクを各自持参）</li>
-            <li>おつまみ・追加食材</li>
-            <li>ウェットティッシュ・除菌グッズ</li>
-          </ul>
-        </div>
-        <div class="check-card">
-          <h3>あると盛り上がるもの！</h3>
-          <ul>
-            <li>トランプ・ボードゲームなど</li>
-            <li>Bluetoothスピーカー</li>
-            <li>星座アプリ</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+<section class="gallery">
+  <div class="gal" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=90')"><div><h3>Ocean</h3><p>Seaside stay</p></div></div>
+  <div class="gal" style="background-image:url('https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=1400&q=90')"><div><h3>BBQ</h3><p>Dinner together</p></div></div>
+  <div class="gal" style="background-image:url('https://images.unsplash.com/photo-1478827536114-da961b7f86d2?auto=format&fit=crop&w=1400&q=90')"><div><h3>Bonfire</h3><p>Night memories</p></div></div>
+</section>
 
-    <section>
-      <h2>👥 参加メンバー</h2>
-      <div class="members">
-        <div class="member">1．たかし名前／担当／メモ</div>
-        <div class="member">2．名前／担当／メモ</div>
-        <div class="member">3．名前／担当／メモ</div>
-        <div class="member">4．名前／担当／メモ</div>
-        <div class="member">5．名前／担当／メモ</div>
-        <div class="member">6．名前／担当／メモ</div>
-        <div class="member">7．名前／担当／メモ</div>
-        <div class="member">8．名前／担当／メモ</div>
-        <div class="member">9．名前／担当／メモ</div>
-        <div class="member">10．名前／担当／メモ</div>
-        <div class="member">11．名前／担当／メモ</div>
-        <div class="member">12．名前／担当／メモ</div>
-        <div class="member pet">🐾 ちょこすけ｜癒し担当｜旅の守り神</div>
-        <div class="member pet">🐾 たろ｜癒し担当｜旅の守り神</div>
-      </div>
-    </section>
+<section class="section guests">
+  <div class="guest-layout">
+    <div class="crew">
+      <h2>The Crew</h2>
+      <p>12名と，ちょこすけ，たろ．<br>みんなで過ごす1泊2日のグランピング．</p>
+    </div>
+    <div class="guest-cards">
+      <div class="guest-card"><span>Guest 01</span><b>たかし</b></div>
+      <div class="guest-card"><span>Guest 02</span><b>名前を記入</b></div>
+      <div class="guest-card"><span>Guest 03</span><b>名前を記入</b></div>
+      <div class="guest-card"><span>Guest 04</span><b>名前を記入</b></div>
+      <div class="guest-card"><span>Guest 05</span><b>名前を記入</b></div>
+      <div class="guest-card"><span>Guest 06</span><b>名前を記入</b></div>
+      <div class="guest-card"><span>Guest 07</span><b>名前を記入</b></div>
+      <div class="guest-card"><span>Guest 08</span><b>名前を記入</b></div>
+      <div class="guest-card"><span>Guest 09</span><b>名前を記入</b></div>
+      <div class="guest-card"><span>Guest 10</span><b>名前を記入</b></div>
+      <div class="guest-card"><span>Guest 11</span><b>名前を記入</b></div>
+      <div class="guest-card"><span>Guest 12</span><b>名前を記入</b></div>
+      <div class="guest-card pet"><span>Healing Crew</span><b>🐾 ちょこすけ</b></div>
+      <div class="guest-card pet"><span>Healing Crew</span><b>🐾 たろ</b></div>
+    </div>
+  </div>
+  <div class="rooms">
+    <div class="room"><h3>DOME A</h3><ul><li>たかし</li><li>名前を記入</li><li>名前を記入</li></ul></div>
+    <div class="room"><h3>DOME B</h3><ul><li>名前を記入</li><li>名前を記入</li><li>名前を記入</li></ul></div>
+    <div class="room"><h3>DOME C</h3><ul><li>名前を記入</li><li>名前を記入</li><li>名前を記入</li></ul></div>
+    <div class="room"><h3>DOME D</h3><ul><li>名前を記入</li><li>名前を記入</li><li>名前を記入</li><li>ちょこすけ・たろ</li></ul></div>
+  </div>
+</section>
 
-    <section>
-      <h2>📞 緊急連絡先</h2>
-      <div class="contact-grid">
-        <div class="contact"><span>施設</span><strong>グランドーム福岡ふくつ</strong><br>要確認（予約時の連絡先を記入）</div>
-        <div class="contact"><span>予約番号</span><strong>記入欄</strong></div>
-        <div class="contact"><span>幹事の連絡先</span><strong>記入欄</strong></div>
-        <div class="contact"><span>緊急・救急／警察</span><strong>119 ／ 110</strong></div>
-      </div>
-    </section>
+<section class="section checks">
+  <div class="section-title">
+    <h2>Packing<br>List</h2>
+    <p>当日の朝に見れば足りるように，必要なものだけを大きく整理しています．</p>
+  </div>
+  <div class="check-grid">
+    <div class="check-card">
+      <h3>Essentials</h3>
+      <ul>
+        <li>身分証明書・財布・現金</li>
+        <li>着替え・パジャマ</li>
+        <li>洗面用具・タオル</li>
+        <li>スマートフォン・充電器</li>
+        <li>モバイルバッテリー</li>
+      </ul>
+    </div>
+    <div class="check-card">
+      <h3>Glamping</h3>
+      <ul>
+        <li>羽織れる上着</li>
+        <li>歩きやすい靴</li>
+        <li>虫除け・かゆみ止め</li>
+        <li>飲み物・おつまみ</li>
+        <li>トランプ・ボードゲーム</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <section>
-      <h2>📝 旅のメモ</h2>
-      <div class="memo"></div>
-    </section>
+<section class="contact">
+  <div class="contact-photo"></div>
+  <div class="contact-body">
+    <h2>See you<br>around<br>the fire.</h2>
+    <p class="message">困ったときはここを確認．<br>予約番号や連絡先は最終版で差し替えます．</p>
+    <div class="info-list">
+      <div class="info"><span>Facility</span><b>グランドーム福岡ふくつ</b></div>
+      <div class="info"><span>Check In / Out</span><b>15:00 / 翌10:00</b></div>
+      <div class="info"><span>Reservation</span><b>予約番号：記入欄</b></div>
+      <div class="info"><span>Organizer</span><b>幹事連絡先：記入欄</b></div>
+      <div class="info"><span>Emergency</span><b>119 / 110</b></div>
+    </div>
+  </div>
+</section>
 
-    <p class="footer">✨ Have a wonderful glamping trip! ✨<br>🐾 🐾 🐾</p>
-    <p class="print-note">印刷する場合はブラウザの「印刷」からPDF保存できます．</p>
-  </main>
+<footer class="footer">Grandome Fukutsu Autumn Glamping 2026</footer>
 </body>
 </html>
